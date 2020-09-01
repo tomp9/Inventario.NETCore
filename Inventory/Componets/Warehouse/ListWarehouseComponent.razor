@@ -1,0 +1,33 @@
+﻿@using Entities
+@using Bussines
+
+<table class="table table table-hover table-bordered">
+    <thead>
+        <tr>
+            <th>Código</th>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var warehouse in Warehouses)
+        {
+        <tr>
+            <th>@warehouse.WarehouseId</th>
+            <th>@warehouse.WarehouseName</th>
+            <th>@warehouse.WarehouseAddress</th>
+            <th></th>
+        </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+
+    List<WarehouseEntity> Warehouses = new List<WarehouseEntity>();
+    protected override async Task OnInitializedAsync()
+    {
+        Warehouses = B_Warehouse.ItemList();
+    }
+}

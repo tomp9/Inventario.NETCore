@@ -1,0 +1,26 @@
+Se debe instalar los nugets de entity framework core de tools y de sql server , 
+para realizar migraciones.
+
+El comando para migrar desde la consola de paquetes es :
+
+add-migration FirstMigration
+
+-- Remove-Migration para deshacer el cambio
+
+En ese punto la bd no se ha creado , solo se crea la estructura de la migracion en visual studio
+
+Con : 
+
+ update-database 
+
+Se actualiza la estructura en SQL SERVER
+
+Con : 
+
+	add-migration AddData
+
+Se insertan los registros en las tablas
+
+update-database 
+
+para agregar la actualizacion a la migración 

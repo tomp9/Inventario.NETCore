@@ -1,0 +1,49 @@
+﻿@using Entities
+@using Bussines
+
+@inject NavigationManager NavManager
+
+<div>
+    <EditForm Model="oProduct">
+        <div class="form-group">
+            <label>Referencia : </label>
+            <InputText @bind-Value="oProduct.ProductId" class="form-control">
+            </InputText>
+        </div>
+        <div class="form-group">
+            <label>Nombre del producto : </label>
+            <InputText @bind-Value="oProduct.ProductName" class="form-control">
+            </InputText>
+        </div>
+        <div class="form-group">
+            <label>Descripción del producto : </label>
+            <InputText @bind-Value="oProduct.ProductDescription" class="form-control">
+            </InputText>
+        </div>
+
+        <div class="form-group">
+            <label>Categoría : </label>
+            <InputSelect @bind-Value="oProduct.CategoryId" class="form-control">
+                @foreach (var category in Categories) 
+                { 
+                    <option value="@category.CategoryId"> @category.CategotyName </option>
+                }
+            </InputSelect>
+        </div>
+        <input type="button" value="Agregar Producto" @onclick="SaveProduct"/>
+    </EditForm>
+</div>
+@code {
+    ProductEntity oProduct = new ProductEntity();
+    List<CategoryEntity> Categories = new List<CategoryEntity>();
+
+    protected override async Task OnInitializedAsync() {
+
+        Categories = B_Category.ItemList();
+    }
+
+    private void SaveProduct() {
+        B_Product.CreateItem(oProduct);
+        NavManager.NavigateTo("product/list");
+    }
+}

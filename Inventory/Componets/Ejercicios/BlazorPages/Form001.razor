@@ -1,0 +1,26 @@
+﻿<input type="text" @bind-value=@message />
+<input type="text" @bind-value=@textMessage />
+<input type="button" value="Haga clic aquí!" @onclick="ChangeText" />
+<input type="text" @bind=@message2 @bind:event="oninput" />
+
+<div>
+    @message
+    @message2
+</div>
+
+@code {
+    [Parameter]
+    public string Message { get; set; }
+    string message = "Contenido de C# del lado del cliente";
+    string message2;
+    string textMessage = "";
+
+    protected override async Task OnInitializedAsync() {
+        message = Message;
+    }
+
+    private void ChangeText()
+    {
+        textMessage = message;
+    }
+}
